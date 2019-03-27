@@ -1,0 +1,115 @@
+public class NumberToWords {
+
+    public static void numberToWords(int number) {
+        if (number < 0) {
+            System.out.println("Invalid Value");
+        }
+
+        String numberString = "";
+        String combinedNumberString = "";
+
+        if (number == 0){
+            combinedNumberString += "Zero";
+            System.out.println(combinedNumberString);
+        } else {
+
+        int numberDigitCount = getDigitCount(number);
+        //System.out.println(numberDigitCount);
+
+        int reverseNumber = reverse(number);
+        //System.out.println(reverseNumber);
+
+        int reverseNumberDigitCount = getDigitCount(reverseNumber);
+        //System.out.println(reverseNumberDigitCount);
+
+        int missingDigitCount = numberDigitCount - reverseNumberDigitCount;
+        //System.out.println("missingDigitCount = " + missingDigitCount);
+
+        while (reverseNumber > 0) {
+            int digit = reverseNumber % 10;
+            //System.out.println(digit);
+            reverseNumber /= 10;
+            //System.out.println(number);
+
+            switch (digit){
+                case 0: numberString = "Zero ";
+                    break;
+                case 1: numberString = "One ";
+                    break;
+                case 2: numberString = "Two ";
+                    break;
+                case 3: numberString = "Three ";
+                    break;
+                case 4: numberString = "Four ";
+                    break;
+                case 5: numberString = "Five ";
+                    break;
+                case 6: numberString = "Six ";
+                    break;
+                case 7: numberString = "Seven ";
+                    break;
+                case 8: numberString = "Eight ";
+                    break;
+                case 9: numberString = "Nine ";
+                    break;
+            }
+            combinedNumberString += numberString;
+        }
+
+            int loopCount = 0;
+
+            for (int i = missingDigitCount; loopCount < missingDigitCount; loopCount++){
+                combinedNumberString = combinedNumberString + "Zero ";
+                //System.out.println(combinedNumberString);
+            }
+
+        System.out.println(combinedNumberString);}
+    }
+
+    public static int reverse(int number) {
+
+        int modifiedNumber = number;
+
+        if (number < 0){
+            modifiedNumber *= -1;
+        }
+
+        int reverseNumber = 0;
+        while (modifiedNumber > 0) {
+            int digit = modifiedNumber % 10;
+            //System.out.println(digit);
+            modifiedNumber /= 10;
+            //System.out.println(number);
+
+            if (modifiedNumber > 0) {
+                reverseNumber = (reverseNumber + digit) * 10;
+            } else reverseNumber = (reverseNumber + digit);
+        }
+
+        if (number < 0){
+            reverseNumber *= -1;
+        }
+
+        return reverseNumber;
+    }
+
+    public static int getDigitCount(int number){
+
+        if (number < 0){
+            return -1;
+        }
+
+        int count = 0;
+
+        if (number == 0) {
+            count = 1;
+        } else {
+            while (number > 0) {
+                int digit = number % 10;
+                number /= 10;
+                count++;
+            }
+        }
+        return count;
+    }
+}
